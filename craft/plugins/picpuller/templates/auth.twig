@@ -1,0 +1,41 @@
+{% extends "_layouts/cp" %}
+{% includeCssResource("picpuller/style.css") %}
+{# {% includeJsResource("picpuller/auth.js") %} #}
+
+{% set title = "Pic Puller 2 for Craft"|t %}
+
+{% set content %}
+
+    {% if craft.request.getParam('oauth') != '' %}
+        <h2>Success!</h2>
+        <div id='message'>Loading...</div>
+        {% set saveAuthToPPdatabase %}
+            var data = {
+                user_id: "{{ user.id }}",
+                instagram_id: "{{ craft.request.getParam('instagram_id') }}",
+                oauth: "{{ craft.request.getParam('oauth') }}",
+                {{ craft.config.csrfTokenName }}: "{{ craft.request.getParam( craft.config.csrfTokenName ) }}"
+            }
+            Craft.postActionRequest('PicPuller/authorizations/saveCredentials', data, function(response) {
+                console.log('I heard back from the post action');
+                console.log("response:", response);
+                if( (typeof(response) !== "undefined") && (response.success === true) ) {
+                    $("#message").html("<p>Authentication is complete.</p>");
+
+                } else {
+                {# What happens when there is an instagram error? fix this #}
+                   {# $("#message").html("<p>An error was returned.</p><p><em>" + response.error_type + ": " +response.message + "</em></p>"); #}
+                   $("#message").html("<p>An error occured. Authorization data was not saved.</p>");
+                }
+            })
+
+        {% endset %}
+
+        {% includeJs saveAuthToPPdatabase %}
+
+
+    {% else %}
+        <p>ERROR: If you were trying to authenticate an Instagram application the proper values were not passed to this page that are needed to proceed.</p>
+    {% endif %}
+    <p><a href="{{ url('PicPuller') }}" class='btn' title='Return to Pic Puller'>Return to Pic Puller</a></p>
+{% endset %}

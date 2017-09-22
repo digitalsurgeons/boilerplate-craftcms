@@ -1,0 +1,34 @@
+div.tinyimage-blurb {
+    width: 75%;
+    padding: 21px;
+    background: #f7f7f8;
+    margin-bottom: 21px;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+.tinyimage-blurb p {
+
+}
+
+td.filename {
+    width: 50%;
+}
+
+td.source {
+    width: 15%;
+}
+
+td.date-created {
+    width: 15%;
+}
+
+td.size {
+    width: 15%;
+}
+
+td.ignore-col {
+    width: 10%;
+}
+
+td.optimize-col {
+    width: 10%;
+}

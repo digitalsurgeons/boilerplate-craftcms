@@ -1,0 +1,68 @@
+{
+  "name": "boilerplate-craftcms",
+  "version": "0.0.0",
+  "description": "Boilerplate for CraftCMS Builds",
+  "main": "public_html/index.html",
+  "scripts": {
+    "webpack:dev": "SITE=$site webpack --watch --colors",
+    "webpack:prod":
+      "NODE_ENV=production webpack --config ./webpack.config.prod.js --colors",
+    "start": "npm run webpack:prod",
+    "predev": "npm run webpack:dev",
+    "dev": "npm run webpack:dev",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,scss}": [
+      "prettier --write --no-semi --single-quote --jsx-bracket-same-line",
+      "git add"
+    ]
+  },
+  "author": "Digital Surgeons",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "compiler-webpack-plugin": "0.0.1",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.7",
+    "ds-css-cli": "^1.0.14",
+    "eslint": "^3.19.0",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.2.1",
+    "node-sass": "^3.13.1",
+    "onchange": "^3.0.2",
+    "optimize-js": "^1.0.1",
+    "postcss-cssnext": "^2.11.0",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.6",
+    "prettier": "^1.7.0",
+    "sass-lint": "^1.11.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
+    "stylelint": "^8.1.1",
+    "stylelint-config-recommended": "^1.0.0",
+    "stylelint-order": "^0.6.0",
+    "stylelint-selector-bem-pattern": "^2.0.0",
+    "svg-sprite-generator": "0.0.7",
+    "url-loader": "^0.5.9",
+    "watchify": "^3.7.0",
+    "webpack-notifier": "^1.5.0"
+  },
+  "dependencies": {
+    "headroom.js": "^0.9.4",
+    "jquery": "^3.2.1",
+    "normalize.css": "^5.0.0",
+    "object-fit-images": "^3.2.3",
+    "svgxuse": "^1.2.4",
+    "webpack": "^3.6.0"
+  }
+}

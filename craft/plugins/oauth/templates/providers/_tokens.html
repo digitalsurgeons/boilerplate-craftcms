@@ -1,0 +1,61 @@
+{% extends "oauth/_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = provider.name~" Tokens"|t %}
+
+{% set crumbs = [
+    { label: "OAuth"|t, url: url('oauth') }
+] %}
+
+{% set content %}
+
+    {% set tokens = provider.tokens %}
+
+    <p id="notokens"{% if tokens|length %} class="hidden"{% endif %}>
+        {{ "No tokens exist yet."|t }}
+    </p>
+
+    {% if tokens|length %}
+
+        <table id="tokens" class="data fullwidth collapsible">
+            <thead>
+                <tr>
+                    <th class="col">ID</th>
+                    <th class="col">Plugin</th>
+                    <th class="col"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for token in tokens %}
+                    <tr data-id="{{ token.id }}" data-name="Token #{{ token.id|t }}">
+                        <td>{{ token.id }}</td>
+                        <td>
+                            {% if token.plugin %}
+                                {{ token.plugin.name }}
+                            {% else %}
+                                {{ token.pluginHandle }} (Plugin not found)
+                            {% endif %}
+                        </td>
+                        <td class="thin"><a class="delete icon" title="{{ 'Delete'|t }}" role="button"></a></td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    {% endif %}
+
+{% endset %}
+
+
+{% set js %}
+    new Craft.AdminTable({
+        tableSelector: '#tokens',
+        noObjectsSelector: '#notokens',
+        deleteAction: 'oauth/tokens/deleteToken'
+    });
+{% endset %}
+
+{% includeJs js %}

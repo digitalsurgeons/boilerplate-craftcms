@@ -1,0 +1,73 @@
+{% import "_includes/forms" as forms %}
+
+{% set sizeOptions = {
+    '250000': '250 KB',
+    '500000': '500 KB',
+    '750000': '750 KB',
+    '1000000': '1 MB',
+    '1250000': '1.25 MB',
+    '1500000': '1.5 MB',
+    '1750000': '1.75 MB',
+    '2000000': '2 MB',
+} %}
+
+{% set protocolOptions = {
+    'fopen': 'fopen',
+    'curl': 'cURL'
+} %}
+
+<h2>General</h2>
+
+<p>These settings should be modified to your specific installation needs.</p>
+
+{{ forms.textField({
+    label: "API Key"|t,
+    id: 'apiKey',
+    name: 'apiKey',
+    instructions: "Your API key from Tiny PNG."|t,
+    value: settings.apiKey,
+    autofocus: true,
+    errors: settings.getErrors('apiKey')
+}) }}
+
+{{ forms.selectField({
+    label: "Image Threshold Maximum Size",
+    id: 'maximumSize',
+    name: 'maximumSize',
+    options: sizeOptions,
+    value: settings.maximumSize,
+    instructions: "Choose the threshold size of images you want to appear to optimize on your site.",
+}) }}
+
+{{ forms.lightswitchField({
+    label: "Automatically optimize images when first saved?",
+    id: 'optimizeOnAssetSave',
+    name: 'optimizeOnAssetSave',
+    on: settings.optimizeOnAssetSave,
+    instructions: "Enable this setting if you want Tiny Image to automatically process and optimize images when first saved (if they are over the maximum size).",
+}) }}
+
+<hr>
+
+<h2>Advanced</h2>
+
+<p>These settings should be left to the default selection unless you are experiencing any issues using this plugin.</p>
+
+{{ forms.selectField({
+    label: "Protocol",
+    id: 'protocol',
+    name: 'protocol',
+    options: protocolOptions,
+    value: settings.protocol,
+    instructions: "Choose the protocol on how to send requests to the Tiny PNG API."
+}) }}
+
+{{ forms.lightswitchField({
+    label: "Use SSL Certificate",
+    id: 'useSslCert',
+    name: 'useSslCert',
+    on: settings.useSslCert,
+    instructions: "If you are receiving errors with SSL, enable this option."
+}) }}
+
+<hr>

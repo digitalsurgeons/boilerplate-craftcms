@@ -1,0 +1,89 @@
+{% extends "_layouts/cp" %}
+{% includeCssResource "tinyimage/css/tinyimage.css" %}
+{% includeJsResource "tinyimage/js/tinyimage.js" %}
+
+{% set title = "Tiny Image" %}
+
+{% macro bytesToSize(bytes) %}
+{% spaceless %}
+{% set kilobyte = 1024 %}
+{% set megabyte = kilobyte * 1024 %}
+{% set gigabyte = megabyte * 1024 %}
+{% set terabyte = gigabyte * 1024 %}
+
+{% if bytes < kilobyte %}
+{{ bytes ~ ' B' }}
+{% elseif bytes < megabyte %}
+{{ (bytes / kilobyte)|number_format(2, '.') ~ ' KB' }}
+{% elseif bytes < gigabyte %}
+{{ (bytes / megabyte)|number_format(2, '.') ~ ' MB' }}
+{% elseif bytes < terabyte %}
+{{ (bytes / gigabyte)|number_format(2, '.') ~ ' GB' }}
+{% else %}
+{{ (bytes / terabyte)|number_format(2, '.') ~ ' TB' }}
+{% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{% set tabs = {
+    images: { label: "Images"|t, url: url('tinyimage') },
+    sources: { label: "Sources"|t, url: url('tinyimage/sources') },
+    ignored:    { label: "Ignored"|t, url: url('tinyimage/ignored') }
+} %}
+
+{% set selectedTab = 'images' %}
+
+{% set content %}
+
+{% if assets %}
+{% import _self as macro %}
+
+<div class="tinyimage-blurb">
+    <p>These images have been deemed as large and can cause performance issues for your site. However, if you have already optimized the images with this plugin and the asset still shows, you should ignore it from this list.</p>
+</div>
+
+<table class="data fullwidth">
+    <thead>
+        <tr>
+            <th scope="col" data-attribute="file">File</th>
+            <th scope="col" data-attribute="source">Source</th>
+            <th scope="col" data-attribute="dateCreated">Date Created</th>
+            <th scope="col" data-attribute="size">Size</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for asset in assets %}
+        <tr data-attribute="{{ asset.id }}">
+            <td class="filename">
+                <a href="{{ asset.url }}" target="_blank">{{ asset.filename }}</a>
+            </td>
+            <td class="source">
+                {{ asset.source }}
+            </td>
+            <td class="date-created">
+                {{ asset.dateCreated }}
+            </td>
+            <td class="size">
+                {{ macro.bytesToSize(asset.size) }}
+            </td>
+            <td class="ignore-col">
+                <a class="btn tinyimage-ignore-asset" data-asset-id="{{ asset.id }}">Ignore</a>
+                <img src="{{ resourceUrl('tinyimage/images/spinner.gif') }}" style="display:none; float:right" />
+            </td>
+            <td class="optimize-col">
+                <a class="btn submit tinyimage-optimize-asset" data-asset-id="{{ asset.id }}">Optimize</a>
+                <img src="{{ resourceUrl('tinyimage/images/spinner.gif') }}" style="display:none; float:right" />
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+
+    <p>There are no assets that meet the maximum size requirements.</p>
+
+{% endif %}
+
+{% endset %}

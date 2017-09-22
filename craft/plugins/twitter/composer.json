@@ -1,0 +1,25 @@
+{
+  "name": "dukt/twitter",
+  "description": "Tweet field, search widget, embeds, and authenticated Twitter API requests.",
+  "type": "craft-plugin",
+  "version": "1.1.3",
+  "license": "proprietary",
+  "keywords": [
+    "twitter",
+    "cms",
+    "craftcms"
+  ],
+  "authors": [
+    {
+      "name": "Dukt",
+      "homepage": "https://dukt.net/"
+    }
+  ],
+  "require": {
+    "nojimage/twitter-text-php": "^1.1"
+  },
+  "scripts": {
+    "post-update-cmd": ["echo [WARNING] Delete all .git dirs", "rm -rf vendor/**/**/.git"],
+    "post-install-cmd": ["echo [WARNING] Delete all .git dirs", "rm -rf vendor/**/**/.git"]
+  }
+}

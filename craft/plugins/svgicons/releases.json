@@ -1,0 +1,54 @@
+[
+    {
+        "version": "0.0.6",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-11-16T11:10:00-11:00",
+        "notes": [
+            "[Fixed] Updated plugin version - rookie error"
+        ]
+    },
+    {
+        "version": "0.0.5",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-11-16T11:10:00-11:00",
+        "notes": [
+            "[Fixed] Fixed bug when using single svg icons would not display icon in CP"
+        ]
+    },
+    {
+        "version": "0.0.4",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-10-12T11:10:00-11:00",
+        "notes": [
+            "[Fixed] JavaScript namespacing issue"
+            "[Fixed] PHP error when failing to add icon sets during field setup"
+        ]
+    },
+    {
+        "version": "0.0.3",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-10-12T11:00:00-11:00",
+        "notes": [
+            "[Added] Initial support for SVG sprite sheets",
+            "[Improved] Updated README.md"
+        ]
+    },
+    {
+        "version": "0.0.2",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-10-05T11:00:00-11:00",
+        "notes": [
+            "[Added] Obtain icon model from string using new template variable getModel",
+            "[Added] Renamed getIconFromString service method to getModel and fixed pathing issue",
+            "[Improved] Updated README.md"
+        ]
+    },
+    {
+        "version": "0.0.1",
+        "downloadUrl": "https://github.com/fyrebase/svg-icons/archive/master.zip",
+        "date": "2016-09-13T06:48:06.984Z",
+        "notes": [
+            "[Added] Initial release"
+        ]
+    }
+]

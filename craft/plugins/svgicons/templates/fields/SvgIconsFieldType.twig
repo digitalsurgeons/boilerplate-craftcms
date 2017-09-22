@@ -1,0 +1,46 @@
+{#
+/**
+ * SVG Icons plugin for Craft CMS
+ *
+ * SvgIconsFieldType HTML
+ *
+ * @author    Fyrebase
+ * @copyright Copyright (c) 2016 Fyrebase
+ * @link      fyrebase.com
+ * @package   SvgIcons
+ * @since     0.0.1
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ * @link      https://github.com/fyrebase/svg-icons
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+
+{%- set options = (options is defined ? options : []) %}
+{%- set value = (values is defined ? values['sprite'] is defined and values['sprite']|length ? values.resource ~ '/svgicons-' ~ values.type ~ '-' ~ values.sprite : values.icon : null) %}
+{%- set hasOptgroups = false -%}
+
+<div class="svgicons">
+	<select class="svgicons__select" name="{{ name ~ '[icon]' }}" data-placeholder="Select Icon...">
+		<option value="_blank_">None</option>
+		{% for key, option in options %}
+			{% if option.optgroup is defined %}
+				{% if hasOptgroups %}
+					</optgroup>
+				{% else %}
+					{% set hasOptgroups = true %}
+				{% endif %}
+				<optgroup label="{{ option.optgroup }}">
+			{% else %}
+				{% set optionLabel = (option.label is defined ? option.label : option) %}
+				{% set optionValue = (option.value is defined ? option.value : key) %}
+				{% set optionDisabled = (option.disabled is defined ? option.disabled : false) %}
+				<option value="{{ optionValue }}"{% if optionValue == value %} selected{% endif %}{% if optionDisabled %} disabled{% endif %}>{{ optionLabel }}</option>
+			{% endif %}
+		{% endfor %}
+		{% if hasOptgroups %}
+			</optgroup>
+		{% endif %}
+	</select>
+</div>

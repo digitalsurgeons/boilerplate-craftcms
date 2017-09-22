@@ -1,0 +1,7 @@
+{% if errorMsg is defined %}
+    <p class="error">{{ errorMsg|raw }}</p>
+{% endif %}
+
+{% if infoMsg is defined %}
+    <p>{{ infoMsg|raw }}</p>
+{% endif %}

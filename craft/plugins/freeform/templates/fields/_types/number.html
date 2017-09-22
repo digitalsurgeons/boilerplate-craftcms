@@ -1,0 +1,96 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: "Default Value"|t,
+    instructions: "The default value for the field."|t,
+    id: "value",
+    name: "types[number][value]",
+    value: field.value,
+    errors: field.getErrors("value"),
+    required: false
+}) }}
+
+{{ forms.textField({
+    label: "Placeholder"|t,
+    instructions: "The default text that will be shown if the field doesn’t have a value."|t,
+    id: "placeholder",
+    name: "types[number][placeholder]",
+    value: field.placeholder,
+    errors: field.getErrors("placeholder"),
+    required: false
+}) }}
+
+<hr>
+
+{{ forms.lightswitchField({
+    label: "Allow negative numbers?"|t,
+    name: "types[number][allowNegative]",
+    on: field.getProperty('allowNegative', true),
+    reverseToggle: 'placeholder-wrapper',
+}) }}
+
+
+{{ forms.textField({
+    label: "Min Value"|t,
+    instructions: "(Optional) The minimum numeric value this field is allowed to have."|t,
+    name: "types[number][minValue]",
+    value: field.getProperty('minValue'),
+    size: 3,
+}) }}
+
+{{ forms.textField({
+    label: "Max Value"|t,
+    instructions: "(Optional) The maximum numeric value this field is allowed to have."|t,
+    name: "types[number][maxValue]",
+    value: field.getProperty('maxValue'),
+    size: 3,
+}) }}
+
+
+{{ forms.textField({
+    label: "Min Length"|t,
+    instructions: "(Optional) The minimum length of characters the field is allowed to have."|t,
+    name: "types[number][minLength]",
+    value: field.getProperty('minLength'),
+    size: 3,
+}) }}
+
+{{ forms.textField({
+    label: "Max Length"|t,
+    instructions: "(Optional) The maximum length of characters the field is allowed to have."|t,
+    name: "types[number][maxLength]",
+    value: field.getProperty('maxLength'),
+    size: 3,
+}) }}
+
+{{ forms.textField({
+    label: "Decimal Count"|t,
+    instructions: "The number of decimal places allowed."|t,
+    name: "types[number][decimalCount]",
+    value: field.getProperty('decimalCount', 0),
+    size: 3,
+}) }}
+
+{{ forms.selectField({
+    label: "Decimal Separator"|t,
+    instructions: "Used to separate decimals."|t,
+    name: "types[number][decimalSeparator]",
+    value: field.getProperty('decimalSeparator', '.'),
+    options: {
+        '.': '.',
+        ',': ',',
+    }
+}) }}
+
+{{ forms.selectField({
+    label: "Thousands Separator"|t,
+    instructions: "Used to separate thousands."|t,
+    name: "types[number][thousandsSeparator]",
+    value: field.getProperty('thousandsSeparator', ''),
+    options: {
+        '': 'None',
+        ' ': 'Space',
+        ',': ',',
+        '.': '.',
+    }
+}) }}

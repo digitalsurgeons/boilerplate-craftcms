@@ -1,0 +1,30 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% includeCssResource("picpuller/style.css") %}
+
+{% set title = "Pic Puller for Craft"|t %}
+
+{% set userOauth = craft.PicPuller.getUserOauthValue(user.id) %}
+
+{% if user.admin %}
+{% set tabs = {
+
+    setup: { label: "Account"|t, url: url('picpuller') },
+    users: { label: "Authorized Users", url: url('picpuller/users')}
+
+} %}
+{% endif %}
+
+
+
+{% set content %}
+
+{# userOauth #}
+{% if userOauth %}
+{% include "picpuller/controlPanel/admin-oauthtrue" %}
+{% else %}
+{% include "picpuller/controlPanel/admin-oauthfalse" %}
+{% endif %}
+
+
+{% endset %}

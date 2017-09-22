@@ -1,0 +1,15 @@
+{# subject: New submission from {{ form.name }} #}
+{# fromEmail: {{ craft.systemSettings.email.emailAddress }} #}
+{# fromName: {{ craft.systemSettings.email.senderName }} #}
+{# replyToEmail: {{ craft.systemSettings.email.emailAddress }} #}
+{# includeAttachments: true #}
+{# description: New submission sample email template #}
+
+<h2>New submission from {{ form.name }}</h2>
+
+<p>Submitted on: {{ dateCreated|date('Y-m-d H:i:s') }}</p>
+<ul>
+    {% for field in allFields %}
+        <li>{{ field.label }}: {{ field.getValueAsString() }}</li>
+    {% endfor %}
+</ul>

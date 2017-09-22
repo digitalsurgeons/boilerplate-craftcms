@@ -1,0 +1,44 @@
+{% extends "oauth/_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set content %}
+
+    <table id="fields" class="data fullwidth collapsible">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">{{ "Provider"|t }}</th>
+                <th scope="col">{{ "Status"|t }}</th>
+                <th scope="col">{{ "Version"|t }}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for provider in providers %}
+
+                {% set infos = allProviderInfos[provider.handle] %}
+
+                <tr>
+                    <td class="thin">
+                        {% if provider.iconUrl %}
+                            <img src="{{ provider.iconUrl }}" height="24" />
+                        {% endif %}
+                    </td>
+
+                    <td><a href="{{ url('oauth/providers/'~provider.handle) }}">{{provider.name}}</a></td>
+
+                    <td class="nowrap">
+                        {% if provider.isConfigured %}
+                            <span class="status on"></span> {{ "Configured"|t }}
+                        {% else %}
+                            <span class="status"></span><span class="light">{{ "Not Configured"|t }}</span>
+                        {% endif %}
+                    </td>
+
+                    <td class="light">OAuth {{ provider.oauthVersion }}.0</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endset %}

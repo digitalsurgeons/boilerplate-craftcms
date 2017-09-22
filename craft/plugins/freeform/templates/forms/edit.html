@@ -1,0 +1,59 @@
+{% extends "freeform/_layouts/main" %}
+{% import "_includes/forms" as forms %}
+
+{% set selectedSubnavItem = "forms" %}
+
+{% set crumbs = [
+{ label: "Solspace Freeform"|t, url: url('freeform') },
+{ label: "Forms"|t, url: url('freeform/forms') },
+{ label: form.name ? form.name : "New Form"|t, url: '' },
+] %}
+
+{% block saveButton %}
+    <div class="buttons">
+        <div class="btngroup submit">
+            <input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+
+            <div class="btn submit menubtn"></div>
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a class="formsubmit" data-redirect="{{ continueEditingUrl }}">
+                            {{ "Save and continue editing"|t }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="formsubmit" data-redirect="{{ url('freeform/forms/new') }}">
+                            {{ "Save and add another"|t }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block main %}
+    <script>
+      var formId                   = {{ form.id ? form.id : "null" }};
+      var fieldList                = {{ fieldList|raw }};
+      var fieldTypeList            = {{ fieldTypeList|raw }};
+      var notificationList         = {{ notificationList|raw }};
+      var mailingList              = {{ mailingList|raw }};
+      var crmIntegrations          = {{ crmIntegrations|raw }};
+      var composerState            = {{ form.layoutAsJson|raw }};
+      var formStatuses             = {{ statuses|raw }};
+      var assetSources             = {{ assetSources|raw }};
+      var solspaceFormTemplates    = {{ solspaceFormTemplates|raw }};
+      var formTemplateList         = {{ formTemplates|raw }};
+      var fileKinds                = {{ fileKinds|raw }};
+      var showTutorial             = {{ showTutorial ? "true" : "false" }};
+      var defaultTemplates         = {{ defaultTemplates ? "true" : "false" }};
+      var canManageFields          = {{ canManageFields ? "true" : "false" }};
+      var canManageNotifications   = {{ canManageNotifications? "true" : "false" }};
+      var canManageSettings        = {{ canManageSettings? "true" : "false" }};
+      var isDbEmailTemplateStorage = {{ isDbEmailTemplateStorage ? "true" : "false" }};
+      var isWidgetsInstalled       = {{ isWidgetsInstalled ? "true" : "false" }};
+    </script>
+    <div id="freeform-builder"></div>
+{% endblock %}

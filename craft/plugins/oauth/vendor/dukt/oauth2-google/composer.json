@@ -1,0 +1,28 @@
+{
+    "name": "dukt/oauth2-google",
+    "description": "Google OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Benjamin David",
+            "email": "ben@dukt.net",
+            "homepage": "https://dukt.net"
+        }
+    ],
+    "keywords": [
+        "oauth",
+        "oauth2",
+        "client",
+        "authorization",
+        "authentication",
+        "google"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Dukt\\OAuth2\\Client\\": "src/"
+        }
+    },
+	"require": {
+		"league/oauth2-google": "~1.0"
+	}
+}

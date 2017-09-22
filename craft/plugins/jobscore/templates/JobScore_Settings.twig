@@ -1,0 +1,26 @@
+{#
+/**
+ * Job Score plugin for Craft CMS
+ *
+ * Job Score Settings.twig
+ *
+ * @author    Vadim Goncharov
+ * @copyright Copyright (c) 2016 Vadim Goncharov
+ * @link      http://roundhouseagency.com
+ * @package   JobScore
+ * @since     0.0.1
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% includeCssResource "jobscore/css/JobScore_Style.css" %}
+{% includeJsResource "jobscore/js/JobScore_Script.js" %}
+
+{{ forms.textField({
+    label: 'Organization name',
+    instructions: 'Enter your Job Score organization name.',
+    id: 'organizationName',
+    name: 'organizationName', 
+    value: settings['organizationName']})
+}}

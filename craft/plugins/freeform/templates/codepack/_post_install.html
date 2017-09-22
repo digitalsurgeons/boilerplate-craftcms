@@ -1,0 +1,26 @@
+{% extends "freeform/_layouts/settings" %}
+{% import "_includes/forms" as forms %}
+
+{% set selectedSubnavItem = "settings" %}
+{% set title = "Solspace Freeform: Demo Templates"|t %}
+
+{% includeCssFile resourceUrl('freeform/css/code-pack.css') %}
+{% includeJsFile resourceUrl('freeform/js/cp/code-pack.js') %}
+
+{% block content %}
+
+    <h2>{{ "Demo Templates"|t }}</h2>
+
+    <div>
+        {% set stats = {
+        templates: codePack.templates.contents.fileCount,
+        assets: codePack.assets.contents.fileCount
+        } %}
+
+        {{ "Successfully installed <b>{templates} templates</b> and <b>{assets} assets</b>"|t(stats)|raw }}
+    </div>
+    <div>
+        {{ "You can view the templates <a href='{link}'>here</a>"|t({link: (siteUrl ~ prefix ~ '/')})|raw }}
+    </div>
+
+{% endblock %}

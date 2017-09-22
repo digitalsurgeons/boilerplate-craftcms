@@ -1,0 +1,11 @@
+{% cache %}
+  {% if entry is defined %}
+    {% for block in entry.components %}
+      {% include 'components/' ~ block.type %}
+    {% endfor %}
+  {% else %}
+    {% for block in category.components %}
+      {% include 'components/' ~ block.type %}
+    {% endfor %}
+  {% endif %}
+{% endcache %}

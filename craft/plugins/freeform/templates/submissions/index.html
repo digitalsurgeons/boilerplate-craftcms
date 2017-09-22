@@ -1,0 +1,10 @@
+{% extends "freeform/_layouts/elementType" %}
+
+{% set title = "Freeform Submissions"|t %}
+{% set selectedSubnavItem = 'submissions' %}
+{% set elementType = "Freeform_Submission" %}
+
+{% includeCssResource "freeform/css/charts-explorer.css" %}
+
+{% includeJsResource 'freeform/js/cp/freeform-submissions-index.js' %}
+{% includeJsResource 'freeform/js/cp/freeform-submissions-table-view.js' %}

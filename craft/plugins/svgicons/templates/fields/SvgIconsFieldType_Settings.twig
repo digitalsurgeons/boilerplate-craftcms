@@ -1,0 +1,46 @@
+{#
+/**
+ * SVG Icons plugin for Craft CMS
+ *
+ * SvgIconsFieldType HTML
+ *
+ * @author    Fyrebase
+ * @copyright Copyright (c) 2016 Fyrebase
+ * @link      fyrebase.com
+ * @package   SvgIcons
+ * @since     0.0.1
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ * @link      https://github.com/fyrebase/svg-icons
+ */
+#}
+
+{% import '_includes/forms' as forms %}
+
+<div class="svgicons-settings">
+
+	{% if not errors|length %}
+		{% set iconSetsInput %}
+			{{ forms.checkboxSelectField({
+				id: 'svgicons',
+				name: 'iconSets',
+				label: 'Available Icon Sets'|t,
+				options: iconSets,
+				values: settings.iconSets,
+			}) }}
+		{% endset %}
+	{% else %}
+		{% set iconSetsInput %}
+			<div class="errors">
+				{% for error in errors %}
+					{{ error|t|raw }}
+				{% endfor %}
+			</div>
+		{% endset %}
+	{% endif %}
+
+	{{ forms.field({
+		label: "Icon Sets"|t,
+		id: 'iconSets'
+	}, iconSetsInput) }}
+
+</div>

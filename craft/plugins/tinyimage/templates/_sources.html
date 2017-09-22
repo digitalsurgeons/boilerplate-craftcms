@@ -1,0 +1,78 @@
+{% extends "_layouts/cp" %}
+{% includeCssResource "tinyimage/css/tinyimage.css" %}
+{% includeJsResource "tinyimage/js/tinyimage.js" %}
+
+{% set title = "Tiny Image" %}
+
+{% macro bytesToSize(bytes) %}
+{% spaceless %}
+{% set kilobyte = 1024 %}
+{% set megabyte = kilobyte * 1024 %}
+{% set gigabyte = megabyte * 1024 %}
+{% set terabyte = gigabyte * 1024 %}
+
+{% if bytes < kilobyte %}
+{{ bytes ~ ' B' }}
+{% elseif bytes < megabyte %}
+{{ (bytes / kilobyte)|number_format(2, '.') ~ ' KB' }}
+{% elseif bytes < gigabyte %}
+{{ (bytes / megabyte)|number_format(2, '.') ~ ' MB' }}
+{% elseif bytes < terabyte %}
+{{ (bytes / gigabyte)|number_format(2, '.') ~ ' GB' }}
+{% else %}
+{{ (bytes / terabyte)|number_format(2, '.') ~ ' TB' }}
+{% endif %}
+{% endspaceless %}
+{% endmacro %}
+
+{% set tabs = {
+    images: { label: "Images"|t, url: url('tinyimage') },
+    sources: { label: "Sources"|t, url: url('tinyimage/sources') },
+    ignored:    { label: "Ignored"|t, url: url('tinyimage/ignored') }
+} %}
+
+{% set selectedTab = 'sources' %}
+
+{% set content %}
+
+{% if sources %}
+{% import _self as macro %}
+
+<div class="tinyimage-blurb">
+    <p>These sources have images that have been deemed as large and can cause performance issues for your site. However, if you have already optimized the images with this plugin and the asset still shows, you should ignore it from this list.</p>
+</div>
+
+<table class="data fullwidth">
+    <thead>
+    <tr>
+        <th scope="col" data-attribute="source">Source</th>
+        <th scope="col" data-attribute="file">Type</th>
+        <th scope="col" data-attribute="images">Images</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for source in sources %}
+    <tr data-attribute="{{ source.id }}">
+        <td class="sourcename">
+            {{ source.name }}
+        </td>
+        <td>{{ source.type }}</td>
+        <td>{{ craft.tinyImage.imageCountBySource(source.id) }}</td>
+        <td class="optimize-col">
+        {% if craft.tinyImage.imageCountBySource(source.id) > 0 %}
+            <a class="btn submit tinyimage-optimize-source" data-source-id="{{ source.id }}">Optimize</a>
+            <img src="{{ resourceUrl('tinyimage/images/spinner.gif') }}" style="display:none; float:right" />
+        {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+
+<p>There are no sources that meet the maximum size requirements.</p>
+
+{% endif %}
+
+{% endset %}

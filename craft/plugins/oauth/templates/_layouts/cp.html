@@ -1,0 +1,22 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% includeCssResource "oauth/css/oauth.css" %}
+
+{% set title = "OAuth"|t %}
+
+{% if craft.config.get('advancedMode', 'oauth') %}
+
+    {% set tabs = {
+        providers: { label: "Providers"|t, url: url('oauth') },
+        console: { label: "Console"|t, url: url('oauth/console') },
+    } %}
+
+{% else %}
+
+    {% set tabs = {
+        providers: { label: "Providers"|t, url: url('oauth') },
+        tokens: { label: "Tokens"|t, url: url('oauth/tokens') },
+    } %}
+
+{% endif %}

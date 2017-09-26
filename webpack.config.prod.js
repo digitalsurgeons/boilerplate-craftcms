@@ -41,9 +41,8 @@ module.exports = {
     }),
     new CompilerPlugin('done', function() {
       child_process.exec(
-        `onchange '${config.paths
-          .publicPath}icons' -i -- ./node_modules/.bin/svg-sprite-generate -d ${config
-          .paths.publicPath}icons -o ${config.paths.dist}symbol-defs.svg`
+        `./node_modules/.bin/svg-sprite-generate -d ${config.paths
+          .publicPath}icons -o ${config.paths.dist}symbol-defs.svg`
       )
     }),
     new webpack.optimize.UglifyJsPlugin()

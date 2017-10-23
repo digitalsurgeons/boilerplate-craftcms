@@ -5,8 +5,7 @@
   "main": "public_html/index.html",
   "scripts": {
     "webpack:dev": "SITE=$site webpack --watch --colors",
-    "webpack:prod":
-      "NODE_ENV=production webpack --config ./webpack.config.prod.js --colors",
+    "webpack:prod": "NODE_ENV=production webpack --config ./webpack.config.prod.js --colors",
     "start": "npm run webpack:prod",
     "predev": "npm run webpack:dev",
     "dev": "npm run webpack:dev",
@@ -31,6 +30,7 @@
     "clean-webpack-plugin": "^0.1.16",
     "compiler-webpack-plugin": "0.0.1",
     "copy-webpack-plugin": "^4.0.1",
+    "css-declaration-sorter": "^2.1.0",
     "css-loader": "^0.28.7",
     "ds-css-cli": "^1.0.14",
     "eslint": "^3.19.0",

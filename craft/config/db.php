@@ -16,6 +16,11 @@ return array(
     // The prefix to use when naming tables. This can be no more than 5 characters.
     'tablePrefix' => 'craft',
   ),
+  'boilerplate-craftcms.ac.dsdev' => array (
+    'database' => 'boilerplate-craftcms',
+    'user'     => 'root',
+    'password' => 'root'
+  ),
   'boilerplate-craftcms.ads.dsdev' => array (
     'database' => 'boilerplate-craftcms',
     'user'     => 'root',

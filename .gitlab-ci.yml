@@ -4,19 +4,19 @@ image: registry.gitlab.com/digitalsurgeons/build-base:latest
 cache:
   paths:
     - node_modules/
-    # - vendor
+    - vendor
 
-### Uncomment out the following job for Composer-based projects,
-### then remove this notice.
-# build_backend:
-#   script:
-#     - composer install --no-interaction
-#   artifacts:
-#     paths:
-#       - vendor/
-#   stage: build
-#   only:
-#     - branches
+## Uncomment out the following job for Composer-based projects,
+## then remove this notice.
+build_backend:
+  script:
+    - composer install --no-interaction
+  artifacts:
+    paths:
+      - vendor/
+  stage: build
+  only:
+    - branches
 
 build_frontend:
   script:

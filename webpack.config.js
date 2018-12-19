@@ -14,9 +14,11 @@ const vendor = require('./js/vendor')
 let localEnv = Dotenv.definitions['process.env.LOCAL_URL']
 localEnv = localEnv.substring(1, localEnv.length - 1)
 
+const bundleJs = glob.sync('./components/*(shared|ui)/**/index.js')
+
 module.exports = {
   entry: {
-    bundle: './js/app.js',
+    bundle: bundleJs,
     style: './css/app.css',
     svgxuse: './node_modules/svgxuse/svgxuse.js',
     vendor: vendor
@@ -50,11 +52,8 @@ module.exports = {
     new BrowserSyncPlugin(
       {
         host: 'localhost',
-        proxy:
-          process.env.SITE ||
-          localEnv ||
-          'http://0.0.0.0:8080',
-        port: 3000,
+        proxy: process.env.SITE || localEnv || 'http://0.0.0.0:8080',
+        port: 3000
         // files: ['public_html/dist/*.css']
       },
       {

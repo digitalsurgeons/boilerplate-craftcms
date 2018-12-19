@@ -8,9 +8,11 @@ const child_process = require('child_process')
 const config = require('./config')
 const vendor = require('./js/vendor')
 
+const bundleJs = glob.sync('./components/*(shared|ui)/**/index.js')
+
 module.exports = {
   entry: {
-    bundle: './js/app.js',
+    bundle: bundleJs,
     style: './css/app.css',
     svgxuse: './node_modules/svgxuse/svgxuse.js',
     vendor: vendor

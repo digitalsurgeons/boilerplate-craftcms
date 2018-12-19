@@ -4,15 +4,20 @@ const WebpackNotifierPlugin = require('webpack-notifier')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CompilerPlugin = require('compiler-webpack-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const Dotenv = new (require('dotenv-webpack'))()
 const path = require('path')
+const glob = require('glob')
 const child_process = require('child_process')
 const config = require('./config')
 const vendor = require('./js/vendor')
 
+let localEnv = Dotenv.definitions['process.env.LOCAL_URL']
+localEnv = localEnv.substring(1, localEnv.length - 1)
+
 module.exports = {
   entry: {
     bundle: './js/app.js',
-    style: './scss/app.scss',
+    style: './css/app.css',
     svgxuse: './node_modules/svgxuse/svgxuse.js',
     vendor: vendor
   },
@@ -24,25 +29,33 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader', 'postcss-loader', 'sass-loader']
-        })
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract([
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 }
+          },
+          'postcss-loader'
+        ])
       },
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
     new BrowserSyncPlugin(
       {
         host: 'localhost',
-        proxy: process.env.SITE || 'http://0.0.0.0:8080',
+        proxy:
+          process.env.SITE ||
+          localEnv ||
+          'http://0.0.0.0:8080',
         port: 3000,
-        files: ['public_html/dist/*.css']
+        // files: ['public_html/dist/*.css']
       },
       {
         reload: false
